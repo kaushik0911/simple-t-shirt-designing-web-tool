@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>Web Tool</title>
+<link rel=stylesheet href=design/bootstrap/css/bootstrap.min.css>
+<link href=design/bootstrap/css/bootstrap-responsive.css rel=stylesheet type=text/css>
+<link href=design/main/resources/css/jquery.toastmessage.css rel=stylesheet type=text/css>
+<script src=design/jquery-1.11.2.min.js></script>
+<script src=design/fabric.min.js></script>
+<script src=design/fabricjs_viewport.js></script>
+<script src=design/main/javascript/jquery.toastmessage.js></script>
+<script src=design/bootbox.min.js></script>
+<script src=design/bootstrap/js/bootstrap.min.js></script>
+<script src=design/jscolor/jscolor.js></script>
+</head>
+<body>
+<table width=850 height=700 align=center>
+<tbody>
+<tr>
+<td width=515 height=610 style=border-style:solid;border-color:#acacac;border-width:thin>
+<canvas id=c width=515 height=610>
+</canvas>
+</td>
+<td style=border-style:solid;border-color:#acacac;border-width:thin>
+<div class=container style=width:inherit>
+<ul class="nav nav-tabs nav-justified" style>
+<li class=active><a href=#Text data-toggle=tab> Text </a></li>
+<li><a href=#Picture data-toggle=tab> picture </a></li>
+<li><a href=#Control data-toggle=tab> control </a></li>
+</ul>
+<div class=tab-content style=width:inherit;height:610px>
+<div class="tab-pane fade in active" id=Text>
+<table>
+<tbody>
+<tr bordercolor=#010101>
+<td>
+<input type=text class=form-control placeholder=text id=txtBox>
+<input type=button class="btn btn-info" value=insert onclick=addtext()>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tbody>
+<tr>
+<td>Font Family
+</td>
+</tr>
+<tr>
+<td>
+<select class=form-control id=fontType onchange=changeFontFamily()>
+<option>Arial</option>
+<option>Arial Black</option>
+<option>Arial Narrow</option>
+<option>Gill Sans</option>
+<option>Trebuchet MS</option>
+<option>Papyrus</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>Text Aling &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<select class=form-control id=textAlignControl onchange=changeTextAlign()>
+<option value=left>left</option>
+<option value=center>center</option>
+<option value=right>right</option>
+</select><br>
+</td>
+</tr>
+<tr>
+<td>Text Colour &nbsp;&nbsp;&nbsp;
+<input class="color{hash:true,caps:false} form-control" type=text value=FFFFFF id=textColorPicker onchange=applyTextColor()>
+</td>
+</tr>
+<tr>
+<td>Text Background Colour
+<input class="color{hash:true,caps:false} form-control" type=text value=FFFFFF id=backgroundTextColourPicker onchange=applyTextBackgroundColor()>
+</td>
+</tr>
+<tr>
+<td>Text Stroke Colour
+<input class="color{hash:true,caps:false} form-control" type=text value=FFFFFF id=textStrokeColourPicker onchange=applyTextStrokeColor()> <br>
+</td>
+</tr>
+<tr>
+<td>Font Size &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=range min=20 max=72 step=4 value=20 class=slider id=fontSizeControl onchange=changeFontSize()>
+</td>
+</tr>
+<tr>
+<td>Stroke Width &nbsp;&nbsp;&nbsp;
+<input type=range min=1 max=10 step=1 value=1 class=slider id=strokeSizeControl onchange=applyTextStrokeColor()>
+</td>
+</tr>
+<tr>
+<td>Line Space &nbsp;&nbsp;&nbsp;&nbsp;
+<select class=form-control id=lineSpace onchange=changeLineSpace()>
+<option>1</option>
+<option>1.15</option>
+<option>1.5</option>
+<option>2</option>
+<option>2.5</option>
+<option>3</option>
+</select>
+</td>
+</tr>
+<tr>
+<td><br><br>
+<button type=button class="btn btn-default" onclick=changeStyleBold()>Bold</button>
+<button type=button class="btn btn-default" onclick=changeStyleItalic()>Italic</button>
+<button type=button class="btn btn-default" onclick=changeTextDecorationUnderline()>Under Line</button>
+<button type=button class="btn btn-default" onclick=changeTextDecorationLineThrough()>Line Thorugh</button>
+<button type=button class="btn btn-default" onclick=changeTextDecorationOverLine()>Over Line</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane fade" id=Picture>
+<table>
+<tbody>
+<tr>
+<td>
+<input type=file id=imgLoader class="btn btn-info">
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<table>
+<tbody>
+<tr>
+<td>
+<table>
+<tbody>
+<tr>
+<td>
+<img src=design/images/Android-icon.png height=80 width=80 id=image1 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/drop-icon.png height=80 width=80 id=image2 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/fm-icon.png height=80 width=80 id=image3 onclick=addImage(this.id)>
+</td>
+</tr>
+<tr>
+<td>
+<img src=design/images/image%201.png height=80 width=80 id=image5 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/image%202.png height=80 width=80 id=image6 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/image%203.png height=80 width=80 id=image7 onclick=addImage(this.id)>
+</td>
+</tr>
+<tr>
+<td>
+<img src=design/images/vertical-icon.png height=80 width=80 id=image9 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/dog-bows-icon.png height=80 width=80 id=image10 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/dog-boxer-icon.png height=80 width=80 id=image11 onclick=addImage(this.id)>
+</td>
+</tr>
+<tr>
+<td>
+<img src=design/images/plane-icon.png height=80 width=80 id=image8 onclick=addImage(this.id)>
+</td>
+<td>
+<img src=design/images/HTML-3-icon.png height=80 width=80 id=image4 onclick=addImage(this.id)>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<table>
+<tbody>
+<tr><td>
+<div class=btn-group role=group>
+<button type=button class="btn btn-default" onclick="addBackGroundImage('T-Shit-Front')">T-Shit-Front</button>
+<button type=button class="btn btn-default" onclick="addBackGroundImage('T-Shit-Back')">T-Shit-Back</button>
+</div></td>
+</tr>
+<tr><td>
+<div class=btn-group role=group>
+<button type=button class="btn btn-default" onclick="addBackGroundImage('Mug Handle left')">Mug(Handle left)</button>
+<button type=button class="btn btn-default" onclick="addBackGroundImage('Mug Handle right')">Mug(Handle right)</button>
+</div></td>
+</tr>
+<tr><td>
+<div class=btn-group role=group>
+<button type=button class="btn btn-default" onclick="addBackGroundImage('Umbrella')">Umbrella</button>
+</div></td>
+</tr>
+</tbody>
+</table>
+<br/>
+<table>
+<tbody>
+<tr>
+<td>
+<input class="color{hash:true,caps:true} form-control" value=FFFFFF id=colorPickerItem type=text>
+<button type=button class="btn btn-default" onclick=changeImageColour()>Change Item Colour</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane fade" id=Control>
+<table>
+<tbody>
+<tr>
+<td>
+<button type=button class="btn btn-danger" onclick=removeAll()>Remove All Items</button>
+</td>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-default" onclick=removeItem()>Remove Selected Item</button>
+</td>
+</tr>
+<tr>
+<td><h6>Item Arrangement</h6>
+<tr>
+<td>
+<button type=button class="btn btn-default" onclick=bringForward()>Bring forward</button>
+<button type=button class="btn btn-default" onclick=bringToFront()>Bring to front</button>
+</td>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-default" onclick=sendBackward()>Send backward</button>
+<button type=button class="btn btn-default" onclick=sendToBack()>Send to back</button>
+</td>
+</tr>
+</td>
+</tr>
+<tr>
+<td><h6>Controls</h6>
+<tr>
+<td>
+<button type=button class="btn btn-info" onclick=lockScale()>Lock Scale</button>
+<button type=button class="btn btn-info" onclick=lockRotation()>Lock Rotation</button>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+</tr>
+</td>
+</tr>
+<tr>
+<td>
+<tr>
+<td>
+<button type=button class="btn btn-info" onclick=zoomIn()>Zoom in</button>
+<button type=button class="btn btn-info" onclick=zoomOut()>Zoom out</button>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-info" onclick=grabModeOn()>Grab Mode On</button>
+<button type=button class="btn btn-info" onclick=grabModeOff()>Grab Mode Off</button>
+</td>
+</tr>
+</td>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-info" onclick=lockMovementOn()>Lock Movement On</button>
+<button type=button class="btn btn-info" onclick=lockMovementOff()>Lock Movement Off</button>
+</td>
+</tr>
+<tr>
+<td>
+<br>
+<button type=button class="btn btn-success" onclick=toImg()>Save Canvas</button>
+</td>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-success" onclick=toJson()>Export to Json</button>
+</td>
+</tr>
+<tr>
+<td>
+<textarea class=form-control rows=2 id=comment></textarea>
+</td>
+</tr>
+<tr>
+<td>
+<button type=button class="btn btn-success" onclick=fromJson()>Import from Json</button>
+</td>
+</tr>
+<tr>
+<td>
+<textarea class=form-control rows=3 id=import></textarea>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<script>var canvas=new fabric.CanvasWithViewport("c");fabric.Image.fromURL("design/item Images/ftshirt.png",function(a){canvas.add(a);a.left=84.5;a.top=5;a.width=385;a.height=500;a.lockMovementX=true;a.lockMovementY=true;a.hasControls=false;a.selectable=false;canvas.renderAll()});function changeImageColour(){var a=canvas.getActiveObject();var c=document.getElementById("colorPickerItem").value;var b=new fabric.Image.filters.Tint({color:c,opacity:0.9});a.filters.push(b);a.applyFilters(canvas.renderAll.bind(canvas))}function addtext(){var b=document.getElementById("txtBox").value;var d=document.getElementById("fontType").value;var f=new fabric.IText(b,{fontFamily:d,left:fabric.util.getRandomInt(0,100),top:fabric.util.getRandomInt(0,100)});canvas.add(f);function c(h){var g=h.target;message=g.value;drawScreen()}function a(){textControl.value=canvas.getActiveObject().getText()}var e=$("#font-control");$(document.body).on("change","#font-control",function(){mytext.fontFamily=e.val();canvas.renderAll()})}function applyTextColor(){var a=canvas.getActiveObject();var b=document.getElementById("textColorPicker").value;a.set({fill:b});canvas.renderAll()}function applyTextBackgroundColor(){var a=canvas.getActiveObject();var b=document.getElementById("backgroundTextColourPicker").value;a.set({textBackgroundColor:b});canvas.renderAll()}function applyTextStrokeColor(){var b=canvas.getActiveObject();var c=document.getElementById("textStrokeColourPicker").value;var a=(document.getElementById("strokeSizeControl").value)/10;b.set({stroke:c,strokeWidth:a});canvas.renderAll()}function changeFontSize(){var b=canvas.getActiveObject();var a=document.getElementById("fontSizeControl").value;b.set({fontSize:a});canvas.renderAll()}function changeFontFamily(){var a=canvas.getActiveObject();var b=document.getElementById("fontType").value;a.set({fontFamily:b});canvas.renderAll()}function changeTextAlign(){var a=canvas.getActiveObject();var b=document.getElementById("textAlignControl").value;a.set({textAlign:b});canvas.renderAll()}function changeLineSpace(){var a=canvas.getActiveObject();var b=document.getElementById("lineSpace").value;a.set({lineHeight:b});canvas.renderAll()}function changeStyleBold(){var a=canvas.getActiveObject();if(a.getFontWeight()=="bold"){a.set({fontWeight:"normal"});canvas.renderAll()}else{a.set({fontWeight:"bold"});canvas.renderAll()}}function changeStyleItalic(){var a=canvas.getActiveObject();if(a.getFontStyle()=="italic"){a.set({fontStyle:"normal"});canvas.renderAll()}else{a.set({fontStyle:"italic"});canvas.renderAll()}}function changeTextDecorationUnderline(){var a=canvas.getActiveObject();if(a.getTextDecoration()=="underline"){a.set({textDecoration:"normal"});canvas.renderAll()}else{a.set({textDecoration:"underline"});canvas.renderAll()}}function changeTextDecorationLineThrough(){var a=canvas.getActiveObject();if(a.getTextDecoration()=="line-through"){a.set({textDecoration:"normal"});canvas.renderAll()}else{a.set({textDecoration:"line-through"});canvas.renderAll()}}function changeTextDecorationOverLine(){var a=canvas.getActiveObject();if(a.getTextDecoration()=="overline"){a.set({textDecoration:"normal"});canvas.renderAll()}else{a.set({textDecoration:"overline"});canvas.renderAll()}}function lockScale(){if(canvas.getActiveObject().lockScalingX==true&&canvas.getActiveObject().lockScalingY==true){canvas.getActiveObject().lockScalingX=canvas.getActiveObject().lockScalingY=false}else{canvas.getActiveObject().lockScalingX=canvas.getActiveObject().lockScalingY=true}this.__canvases.push(canvas)}function lockRotation(){if(canvas.getActiveObject().lockRotation==true){canvas.getActiveObject().lockRotation=false}else{canvas.getActiveObject().lockRotation=true}this.__canvases.push(canvas)}function bringForward(){var a=canvas.getActiveObject();if(a!=null){canvas.bringForward(a);canvas.renderAll()}}function bringToFront(){var a=canvas.getActiveObject();if(a!=null){canvas.bringToFront(a);canvas.renderAll()}}function sendBackward(){var a=canvas.getActiveObject();if(a!=null){canvas.sendBackwards(a);canvas.sendToBack(background);canvas.renderAll()}}function sendToBack(){var a=canvas.getActiveObject();if(a!=null){canvas.sendToBack(a);canvas.sendToBack(background);canvas.renderAll()}}function removeItem(){canvas.remove(canvas.getActiveObject())}function removeAll(){bootbox.confirm("By selecting new item current canvas will export and current data will lost.. ",function(a){if(a==true){canvas.clear()}else{}})}document.getElementById("imgLoader").onchange=function handleImage(b){var a=new FileReader();a.onload=function(d){console.log("fdsf");var c=new Image();c.src=d.target.result;c.onload=function(){var e=new fabric.Image(c);e.set({left:1,top:1,angle:20,padding:10,cornersize:10});canvas.add(e)}};a.readAsDataURL(b.target.files[0])};canvas.on({"object:moving":function(a){a.target.opacity=0.5},"object:modified":function(a){a.target.opacity=1}});function zoomIn(){canvas.setZoom(canvas.viewport.zoom*1.1);canvas.renderAll()}function zoomOut(){canvas.setZoom(canvas.viewport.zoom*0.9);canvas.renderAll()}function grabModeOn(){canvas.isGrabMode=true;canvas.renderAll()}function grabModeOff(){canvas.isGrabMode=false;canvas.renderAll()}function toImg(){var a=canvas.toDataURL("image/png").replace("image/png","image/octet-stream");window.location.href=a;$().toastmessage("showSuccessToast","some message here")}function addImage(c){var b=document.getElementById(c);var a=new fabric.Image(b,{left:fabric.util.getRandomInt(0,100),top:fabric.util.getRandomInt(0,100),});canvas.add(a)}function addBackGroundImage(a){var b=a;bootbox.confirm("By selecting new item current canvas will export and current data will lost.. ",function(c){if(c==true){toImg();if(b=="T-Shit-Front"){fabric.Image.fromURL("design/item Images/ftshirt.png",function(d){canvas.clear();canvas.add(d);d.left=84.5;d.top=5;d.width=481;d.height=600;d.lockMovementX=true;d.lockMovementY=true;d.hasControls=false;d.selectable=false;canvas.renderAll()})}if(b=="T-Shit-Back"){fabric.Image.fromURL("design/item Images/btshirt.png",function(d){canvas.clear();canvas.add(d);d.left=84.5;d.top=5;d.width=481;d.height=600;d.lockMovementX=true;d.lockMovementY=true;d.hasControls=false;d.selectable=false;canvas.renderAll()})}if(b=="Mug Handle left"){fabric.Image.fromURL("design/item Images/mug_L.png",function(d){canvas.clear();canvas.add(d);d.left=84.5;d.top=5;d.width=481;d.height=600;d.lockMovementX=true;d.lockMovementY=true;d.hasControls=false;d.selectable=false;canvas.renderAll()})}if(b=="Mug Handle right"){fabric.Image.fromURL("design/item Images/mug_R.png",function(d){canvas.clear();canvas.add(d);d.left=84.5;d.top=5;d.width=481;d.height=600;d.lockMovementX=true;d.lockMovementY=true;d.hasControls=false;d.selectable=false;canvas.renderAll()})}if(b=="Umbrella"){fabric.Image.fromURL("design/item Images/um.png",function(d){canvas.clear();canvas.add(d);d.left=84.5;d.top=5;d.width=481;d.height=600;d.lockMovementX=true;d.lockMovementY=true;d.hasControls=false;d.selectable=false;canvas.renderAll()})}}else{}})}function toJson(){document.getElementById("comment").value=JSON.stringify(canvas)}function fromJson(){var a=document.getElementById("import").value;canvas.clear();canvas.loadFromJSON(a);canvas.renderAll.bind(canvas)}function lockMovementOn(){var a=canvas.getActiveObject();a.lockMovementX=true;a.lockMovementY=true}function lockMovementOff(){var a=canvas.getActiveObject();a.lockMovementX=false;a.lockMovementY=false};</script>
+</body>
+</html>
